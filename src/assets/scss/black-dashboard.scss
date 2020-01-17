@@ -97,7 +97,10 @@
 @import "black-dashboard/custom/cards/card-user";
 @import "black-dashboard/custom/cards/card-task";
 @import "black-dashboard/custom/cards/card-plain";
+// Vendor (Plugins)
+
+@import "black-dashboard/custom/vendors";
 
 // Angular Differences
 
-@import "black-dashboard/angular-differences/angular-differences"
+@import "black-dashboard/angular-differences/angular-differences";

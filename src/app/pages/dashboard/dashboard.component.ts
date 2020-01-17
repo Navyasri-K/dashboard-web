@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import Chart from 'chart.js';
+import { TasksModel } from '../../models/task.model';
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "dashboard.component.html"
 })
 export class DashboardComponent implements OnInit {
-  public canvas : any;
+  public canvas: any;
   public ctx;
   public datasets: any;
   public data: any;
@@ -14,8 +15,12 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
   public clicked2: boolean = false;
+  isEditIcon: boolean = true;
+  tasksCollection: TasksModel[];
+  selectedTask: TasksModel;
+  selectActionTitle: string = "Select All";
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
@@ -343,17 +348,14 @@ export class DashboardComponent implements OnInit {
       options: gradientChartOptionsConfigurationWithTooltipRed
     });
 
-
     this.canvas = document.getElementById("chartLineGreen");
     this.ctx = this.canvas.getContext("2d");
-
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
     gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
     gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
     gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
-
     var data = {
       labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
       datasets: [{
@@ -382,8 +384,6 @@ export class DashboardComponent implements OnInit {
 
     });
 
-
-
     var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     this.datasets = [
       [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
@@ -391,8 +391,6 @@ export class DashboardComponent implements OnInit {
       [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
     ];
     this.data = this.datasets[0];
-
-
 
     this.canvas = document.getElementById("chartBig1");
     this.ctx = this.canvas.getContext("2d");
@@ -429,9 +427,8 @@ export class DashboardComponent implements OnInit {
     };
     this.myChartData = new Chart(this.ctx, config);
 
-
     this.canvas = document.getElementById("CountryChart");
-    this.ctx  = this.canvas.getContext("2d");
+    this.ctx = this.canvas.getContext("2d");
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
     gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
@@ -462,9 +459,141 @@ export class DashboardComponent implements OnInit {
       options: gradientBarChartConfiguration
     });
 
+    this.prepareTasks();
   }
+
   public updateOptions() {
     this.myChartData.data.datasets[0].data = this.data;
     this.myChartData.update();
+  }
+
+  editTaskClick(index) {
+
+    this.selectedTask = this.tasksCollection[index];
+    document.getElementById("editTtitle" + index).contentEditable = "true";
+    document.getElementById("editContent" + index).contentEditable = "true";
+    this.selectedTask.isEditIcon = false;
+  }
+
+  saveTaskClick(index) {
+    document.getElementById("editTtitle" + index).contentEditable = "false";
+    document.getElementById("editContent" + index).contentEditable = "false";
+    this.selectedTask.isEditIcon = true;
+  }
+
+  selectedAllTasks() {
+
+    if (this.tasksCollection.filter(con => con.isChecked == true).length != this.tasksCollection.length) {
+
+      this.tasksCollection.forEach(con => {
+        con.isChecked = true;
+      });
+
+      this.selectActionTitle = "UnSelect All";
+    }
+    else {
+      this.tasksCollection.forEach(con => {
+        con.isChecked = false;
+      });
+
+      this.selectActionTitle = "Select All";
+    }
+  }
+
+  markAsCompleted() {
+    this.tasksCollection.forEach(con => {
+      if (con.isChecked)
+        con.taskStatus = "Completed";
+    });
+  }
+
+  deleteSelectedTasks() {
+
+    let totalCol = [];
+
+    this.tasksCollection.forEach(item => {
+      if (item.isChecked)
+        totalCol.push(item);
+    });
+
+    totalCol.forEach(con => {
+      let index = this.tasksCollection.indexOf(con);
+      this.tasksCollection.splice(index, 1);
+    });
+  }
+
+  selectCheck(index) {
+    this.tasksCollection[index].isChecked = !this.tasksCollection[index].isChecked;
+  }
+
+  prepareTasks() {
+
+    this.tasksCollection = [];
+
+    let task1 = new TasksModel();
+
+    task1.taskTitle = "Update the Documentation";
+    task1.description = "Dwuamish Head, Seattle, WA 8:47 AM";
+    task1.lastlyUpdatedBy = "Navyasri Gurram";
+    task1.taskStatus = "Pending";
+    task1.assignedTo = "Navyasri Gurram";
+    task1.isShowAssignedTo = false;
+
+    this.tasksCollection.push(task1);
+
+    let task2 = new TasksModel();
+
+    task2.taskTitle = "GDPR Compliance";
+    task2.description = "The GDPR is a regulation that requires businesses to'\n protect the personal data and privacy of Europe citizens\n for transactions that occur within EU member states.";
+    task2.lastlyUpdatedBy = "Navyasri Gurram";
+    task2.taskStatus = "In Progress";
+    task2.assignedTo = "Navyasri Gurram";
+    task2.isShowAssignedTo = false;
+
+    this.tasksCollection.push(task2);
+
+    let task3 = new TasksModel();
+
+    task3.taskTitle = "Solve the issues";
+    task3.description = "Fifty percent of all respondents said they would be more \n likely to shop at a company";
+    task3.lastlyUpdatedBy = "Navyasri Gurram";
+    task3.taskStatus = "Completed";
+    task3.assignedTo = "Navyasri Gurram";
+    task3.isShowAssignedTo = false;
+
+    this.tasksCollection.push(task3);
+
+    let task4 = new TasksModel();
+
+    task4.taskTitle = "Release v2.0.0";
+    task4.description = "Ra Ave SW, Seattle, WA 98116, SUA 11:19 AM";
+    task4.lastlyUpdatedBy = "Navyasri Gurram";
+    task4.taskStatus = "New";
+    task4.assignedTo = "Navyasri Gurram";
+    task4.isShowAssignedTo = false;
+
+    this.tasksCollection.push(task4);
+
+    let task5 = new TasksModel();
+
+    task5.taskTitle = "Export the processed files";
+    task5.description = "The report also shows that consumers will not easily \n forgive a company once a breach exposing their personal\n data occurs.";
+    task5.lastlyUpdatedBy = "Navyasri Gurram";
+    task5.taskStatus = "New";
+    task5.assignedTo = "Navyasri Gurram";
+    task5.isShowAssignedTo = false;
+
+    this.tasksCollection.push(task5);
+
+    let task6 = new TasksModel();
+
+    task6.taskTitle = "Arival at export process";
+    task6.description = " Capitol Hill, Seattle, WA 12:34 AM";
+    task6.lastlyUpdatedBy = "Navyasri Gurram";
+    task6.taskStatus = "Pending";
+    task6.assignedTo = "Navyasri Gurram";
+    task6.isShowAssignedTo = false;
+
+    this.tasksCollection.push(task6);
   }
 }
