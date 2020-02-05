@@ -13,6 +13,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
+import { PubSubService } from './pub-sub/pub_sub.service';
+import { PubSubModule } from './pub-sub/pub_sub.module';
 
 @NgModule({
   imports: [
@@ -23,10 +25,11 @@ import { ComponentsModule } from "./components/components.module";
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    PubSubModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [],
+  providers: [PubSubService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

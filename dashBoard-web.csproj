@@ -27,11 +27,24 @@
   <ItemGroup>
     <None Remove="src\app\models\task.model.ts" />
     <None Remove="src\app\models\user_profile.model.ts" />
+    <None Remove="src\app\pub-sub\pub_sub.module.ts" />
+    <None Remove="src\app\pub-sub\pub_sub.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="src\app\models\task.model.ts" />
     <TypeScriptCompile Include="src\app\models\user_profile.model.ts" />
+    <TypeScriptCompile Include="src\app\pub-sub\pub_sub.module.ts" />
+    <TypeScriptCompile Include="src\app\pub-sub\pub_sub.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\app\pages\correspondence\" />
+    <Folder Include="src\app\pages\disbursement\" />
+    <Folder Include="src\app\pages\ePay\" />
+    <Folder Include="src\app\pages\administration\" />
+    <Folder Include="src\app\pages\recovery\" />
+    <Folder Include="src\app\pages\payment-processing\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
