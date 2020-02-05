@@ -25,13 +25,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="src\app\app-config.ts" />
     <None Remove="src\app\models\task.model.ts" />
     <None Remove="src\app\models\user_profile.model.ts" />
+    <None Remove="src\app\server.ts" />
+    <None Remove="src\app\service\user.service.ts" />
+    <None Remove="src\app\service\user.service_interface.ts" />
+    <None Remove="src\app\shared\base-service\base-gateway.service.ts" />
+    <None Remove="src\app\shared\base-service\handle-response.ts" />
+    <None Remove="src\app\shared\route-guards\auth-guard.ts" />
+    <None Remove="src\app\shared\route-guards\can-active-guard.service.ts" />
+    <None Remove="src\app\shared\route-guards\route-auth-guard.service.ts" />
+    <None Remove="src\app\shared\route-guards\router-reuse-strategy.ts" />
+    <None Remove="src\app\shared\route-guards\routing-state.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="src\app\app-config.ts" />
     <TypeScriptCompile Include="src\app\models\task.model.ts" />
     <TypeScriptCompile Include="src\app\models\user_profile.model.ts" />
+    <TypeScriptCompile Include="src\app\server.ts" />
+    <TypeScriptCompile Include="src\app\service\user.service.ts" />
+    <TypeScriptCompile Include="src\app\service\user.service_interface.ts" />
+    <TypeScriptCompile Include="src\app\shared\base-service\base-gateway.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\base-service\handle-response.ts" />
+    <TypeScriptCompile Include="src\app\shared\route-guards\auth-guard.ts" />
+    <TypeScriptCompile Include="src\app\shared\route-guards\can-active-guard.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\route-guards\route-auth-guard.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\route-guards\router-reuse-strategy.ts" />
+    <TypeScriptCompile Include="src\app\shared\route-guards\routing-state.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
