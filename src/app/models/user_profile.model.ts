@@ -1,11 +1,18 @@
 export class UserProfileModel {
+  userID: number;
+  emailID: string;
+  password: string;
+  ipAddress: string;
+  name: string;
   firstName: string;
   lastName: string;
-  middleName: string;
-  emailId: string;
-  userId: string;
-  password: string;
-  status: string;
-  numberOfTasks: number;
-  pendingTasks: number;
+  mobileNumber: number;
+  address: string;
+  countryCode: string;
+  stateCode: string;
+  city: string;
+  zipCode: string;
+  aboutMe: string;
+  designation: string;
+  profilePic: string;
 }

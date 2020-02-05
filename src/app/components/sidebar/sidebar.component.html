@@ -14,7 +14,7 @@
         *ngFor="let menuItem of menuItems"
         class="{{ menuItem.class }} nav-item">
       <a [routerLink]="[menuItem.path]">
-        <i class="tim-icons  {{ menuItem.icon }}"></i>
+        <i class="{{ menuItem.icon }}"  aria-hidden="true"></i>
         <p>{{ menuItem.title }}</p>
       </a>
     </li>

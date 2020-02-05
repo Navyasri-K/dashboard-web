@@ -10,45 +10,57 @@ export const ROUTES: RouteInfo[] = [
   {
     path: "/dashboard",
     title: "Dashboard",
-    icon: "icon-chart-pie-36",
+    icon: "tim-icons icon-chart-pie-36",
     class: ""
   },
-  //{
-  //  path: "/icons",
-  //  title: "Icons",
-  //  icon: "icon-atom",
-  //  class: ""
-  //},
-  //{
-  //  path: "/maps",
-  //  title: "Maps",
-  //  icon: "icon-pin",
-  //  class: "" },
-  //{
-  //  path: "/notifications",
-  //  title: "Notifications",
-  //  icon: "icon-bell-55",
-  //  class: ""
-  //},
-
   {
     path: "/user",
     title: "User Profile",
-    icon: "icon-single-02",
+    icon: "tim-icons icon-single-02",
     class: ""
   },
   {
-    path: "/tables",
-    title: "Table List",
-    icon: "icon-puzzle-10",
+    path: "/payment_processing",
+    title: "Payment Processing",
+    icon: "tim-icons icon-credit-card",
     class: ""
-  }//,
-  //{
-  //  path: "/typography",
-  //  title: "Typography",
-  //  icon: "icon-align-center",
-  //  class: ""
-  //}
+  },
+  {
+    path: "/correspondence",
+    title: "Correspondence",
+    icon: "fa fa-book",
+    class: ""
+  },
+  {
+    path: "/administration",
+    title: "Administration",
+    icon: "fa fa-user",
+    class: ""
+  },
+  {
+    path: "/ePay",
+    title: "EPay",
+    icon: "fa fa-credit-card",
+    class: ""
+  },
+  {
+    path: "/disbursement",
+    title: "Disbursement",
+    icon: "tim-icons icon-money-coins",
+    class: ""
+  },
+  {
+    path: "/recovery",
+    title: "Recovery",
+    icon: "tim-icons icon-money-coins",
+    class: ""
+  },
+  {
+    path: "/bankreturns",
+    title: "Bank Returns",
+    icon: "fa fa-university",
+    class: ""
+  }
 ];
 
 @Component({

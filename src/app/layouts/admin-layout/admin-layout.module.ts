@@ -15,6 +15,13 @@ import { TypographyComponent } from "../../pages/typography/typography.component
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { CorrespondenceComponent } from '../../pages/correspondence/correspondence.component';
+import { BankReturnsComponent } from '../../pages/bank-returns/bank-returns.component';
+import { DisbursementComponent } from '../../pages/disbursement/disbursement.component';
+import { AdministrationComponent } from '../../pages/administration/administration.component';
+import { EPayComponent } from '../../pages/e-pay/e-pay.component';
+import { PaymentProcessingComponent } from '../../pages/payment-processing/payment-processing.component';
+import { RecoveryComponent } from '../../pages/recovery/recovery.component';
 
 @NgModule({
   imports: [
@@ -32,6 +39,13 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     TypographyComponent,
     NotificationsComponent,
     MapComponent,
+    BankReturnsComponent,
+    CorrespondenceComponent,
+    DisbursementComponent,
+    AdministrationComponent,
+    EPayComponent,
+    PaymentProcessingComponent,
+    RecoveryComponent
     // RtlComponent
   ]
 })
