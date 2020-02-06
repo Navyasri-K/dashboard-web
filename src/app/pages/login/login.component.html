@@ -20,35 +20,33 @@
           <div class="text-center text-muted mb-4">
             <small>Or sign in with credentials</small>
           </div>
-          <form role="form">
-            <div class="form-group mb-3">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                </div>
-                <input class="form-control form-txt"
-                       name="login"
-                       id="loginId"
-                       placeholder="Email"
-                       type="email"
-                       [(ngModel)]="userInfo && userInfo.emailId">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="ni ni-lock-circle-open"></i>
-                  </span>
-                </div>
-                <input class="form-control form-txt"
-                       name="passwword"
-                       id="passwwordId"
-                       placeholder="Password"
-                       type="password"
-                       [(ngModel)]="userInfo && userInfo.password">
-              </div>
-            </div>
+          <form novalidate #loginForm="ngForm" id="loginForm" role="form">
+            <custom-input-withicon [labelText]="''"
+                                   [iconStyle]="'ni ni-email-83'"
+                                   [formControlErrors]="emailIdControl.errors"
+                                   [errorTypes]="{RequiredEmailId: '', InvalidEmailId: ''}">
+              <input class="form-control form-txt"
+                     name="emailIdControl"
+                     id="emailIdControlId"
+                     placeholder="Email"
+                     type="email"
+                     #emailIdControl="ngModel"
+                     [(ngModel)]="userInfo && userInfo.emailId"
+                     appCustomValidator autocomplete="off">
+            </custom-input-withicon>
+            <custom-input-withicon [labelText]="''"
+                                   [iconStyle]="'ni ni-email-83'"
+                                   [formControlErrors]="loginForm.submitted && passwwordControl.errors"
+                                   [errorTypes]="{RequiredPassword: '', InvalidPassword: ''}">
+              <input class="form-control form-txt"
+                     name="passwwordControl"
+                     id="passwwordControlId"
+                     placeholder="Password"
+                     type="password"
+                     #passwwordControl="ngModel"
+                     [(ngModel)]="userInfo && userInfo.password"
+                     appCustomValidator autocomplete="off">
+            </custom-input-withicon>
             <div class="custom-control custom-control-alternative custom-checkbox">
               <input class="custom-control-input"
                      id=" customCheckLogin"

@@ -1,0 +1,9 @@
+{
+  "RequiredEmailId": "Enter an emailId",
+  "InvalidEmailId": "Enter valid emailId",
+  "RequiredPassword": "Enter a Password",
+  "InvalidRegisterEmailId": "Choose an email address",
+  "InvalidPassword": "Wrong password. Try again or click forgot password to reset it.",
+  "RequiredConfirmPassword": "Confrim your password.",
+  "MismatchPasswordConfirmPassword": "Password and confirm password didnt match. Try again"
+}

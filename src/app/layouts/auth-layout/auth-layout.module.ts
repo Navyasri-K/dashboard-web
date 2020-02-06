@@ -8,12 +8,14 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
+import { PubSubModule } from '../../pub-sub/pub_sub.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
+    PubSubModule,
     HttpClientModule,
     NgbModule
   ],

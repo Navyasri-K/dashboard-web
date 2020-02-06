@@ -22,12 +22,14 @@ import { AdministrationComponent } from '../../pages/administration/administrati
 import { EPayComponent } from '../../pages/e-pay/e-pay.component';
 import { PaymentProcessingComponent } from '../../pages/payment-processing/payment-processing.component';
 import { RecoveryComponent } from '../../pages/recovery/recovery.component';
+import { PubSubModule } from '../../pub-sub/pub_sub.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    PubSubModule,
     HttpClientModule,
     NgbModule,
   ],

@@ -1,0 +1,41 @@
+<!--<div>
+  <div class="form-group field-form-group" [ngClass]="{'has-error':errorMessage}">
+    <div class="row">
+      <div class="col-4">
+        <label class="field-label">{{labelText}}</label>
+      </div>
+      <div class="col-8">
+        <ng-content autocomplete="off"></ng-content>
+        <span class=" fa fa-exclamation-triangle field-warnging-icon"
+              *ngIf="errorMessage"
+              title="{{errorMessage}}">
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+      </div>
+      <div class="col-8">
+        <span class="field-label" *ngIf="!errorMessage">&nbsp;</span>
+        <span class="field-errortext-color field-label" *ngIf="errorMessage">{{errorMessage | translate}}</span>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<div class="form-group mb-3" [ngClass]="{'has-error':errorMessage}">
+  <div class="input-group input-group-alternative">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="{{iconStyle}}"></i></span>
+    </div>
+    <ng-content autocomplete="off" class="login-form"></ng-content>
+  </div>
+  <div>
+    <span class="field-label" *ngIf="!errorMessage">&nbsp;</span>
+    <span class=" fa fa-exclamation-triangle field-warnging-icon"
+          *ngIf="errorMessage"
+          title="{{errorMessage}}">
+    </span>
+    <span class="field-errortext-color field-label" *ngIf="errorMessage">{{errorMessage | translate}}</span>
+  </div>
+</div>

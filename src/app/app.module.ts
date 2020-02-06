@@ -22,7 +22,7 @@ import { PubSubService } from './pub-sub/pub_sub.service';
 import { PubSubModule } from './pub-sub/pub_sub.module';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient, './assests/StringResources/ui/', '.json');
+  return new TranslateHttpLoader(httpClient, './assests/ui/', '.json');
 }
 
 @NgModule({
@@ -47,8 +47,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
   providers: [
     //{ provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
-      RoutingState,
-      PubSubService
+    RoutingState,
+    PubSubService
   ],
   bootstrap: [AppComponent]
 })
