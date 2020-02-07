@@ -55,4 +55,23 @@ export class UserService extends BaseGatewayService {
     if (responseData.statusCode == '200')
       return responseData.response;
   }
+
+  async signUp(emailId, password) {
+
+    this.setConigValues();
+
+    let body = {
+      EmailId: emailId,
+      Password: password
+    };
+
+    let params = new HttpParams();
+
+    this.HttpOptions.params = params;
+
+    let responseData = this.post('/api/auth/signup', body, this.HttpOptions);
+
+    if (responseData.statusCode == '200')
+      return responseData.response;
+  }
 }

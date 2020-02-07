@@ -56,3 +56,8 @@
 .text-hide {
   @include text-hide($ignore-warning: true);
 }
+
+.text-title {
+  color: #111213 !important;
+  font-size: 23px;
+}

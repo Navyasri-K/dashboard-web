@@ -1,6 +1,7 @@
 import { Directive } from '@angular/core';
 import { NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
 import { String } from 'typescript-string-operations';
+import { ConstantValues } from '../shared/constants/constant-values.const';
 
 @Directive({
   selector: '[appCustomValidator][ngModel]',
@@ -25,15 +26,18 @@ export class CustomValidatorDirective implements Validator {
 
     let controlValue = "";
 
-    let emailRegExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    let emailRegExp = new RegExp(ConstantValues.emailIdFormat);
+    let pwdRegExp = new RegExp(ConstantValues.passwordFormat);
+
+    console.log(emailRegExp);
 
     if (fControl.value != undefined && fControl.value != null && isNaN(fControl.value))
       controlValue = fControl.value.replace(/[()_-]/g, "");
 
-    if (formControlName == "emailIdControl")
-      return fControl.value == undefined ? { 'RequiredEmailId': true } : !String.IsNullOrWhiteSpace(fControl.value) && !emailRegExp.test(fControl.value) ? { 'InvalidEmailId': true } : null;
+    if (formControlName == "emailIdControl" && fControl.value != undefined)
+      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredEmailId': true } : !emailRegExp.test(fControl.value) ? { 'InvalidEmailId': true } : null;
 
-    if (formControlName == "passwwordControl")
-      return fControl.value == undefined ? { 'RequiredPassword': true } : null;
+    if (formControlName == "passwwordControl" && fControl.value != undefined)
+      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredPassword': true } /*: !pwdRegExp.test(fControl.value) ? { 'InvalidPassword': true }*/ : null;
   }
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserProfileModel } from '../../models/user_profile.model';
-import { BehaviorSubject, Subject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { UserService } from '../../service/user.service';
+import { String } from 'typescript-string-operations';
+import { ConstantValues } from '../../shared/constants/constant-values.const';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +13,15 @@ import { UserService } from '../../service/user.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   userInfo = new UserProfileModel();
-  public message: Subject<string> = new BehaviorSubject('');
 
   @ViewChild('loginForm', { static: false }) form;
 
   constructor(private router: Router,
-    private _userService: UserService) {
+    private _userService: UserService,
+    private _changeDetectRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    //this.userInfo = new UserProfileModel();
   }
 
   ngOnDestroy() {
@@ -30,19 +29,29 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   async signInOkClick() {
 
-    console.log(this.form.controls);
+    let emailRegExp = new RegExp(ConstantValues.emailIdFormat);
+
+    if (String.IsNullOrWhiteSpace(this.userInfo.emailID) || this.userInfo.emailID == undefined)
+      this.form.controls['emailIdControl'].setErrors({ RequiredEmailId: true });
+    else if (!emailRegExp.test(this.userInfo.emailID))
+      this.form.controls['emailIdControl'].setErrors({ InvalidEmailId: true });
+    else
+      this.form.controls['emailIdControl'].setErrors(null);
+
+    if (String.IsNullOrWhiteSpace(this.userInfo.password) || this.userInfo.password == undefined)
+      this.form.controls['passwwordControl'].setErrors({ RequiredPassword: true });
+    else
+      this.form.controls['passwwordControl'].setErrors(null);
 
     if (this.form.valid) {
-      this.message.next('Waiting for second factor.');
 
       let response = await this._userService.login(this.userInfo.emailID, this.userInfo.password);
 
-      console.log(response);
-
       this.router.navigate(['/dashboard']);
+
+      this.form.reset();
+
+      this._changeDetectRef.detectChanges();
     }
-
-
   }
-
 }

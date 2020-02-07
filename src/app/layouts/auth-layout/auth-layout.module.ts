@@ -9,6 +9,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
 import { PubSubModule } from '../../pub-sub/pub_sub.module';
+import { ResetpasswordComponent } from '../../pages/resetpassword/resetpassword.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { PubSubModule } from '../../pub-sub/pub_sub.module';
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ResetpasswordComponent
   ]
 })
 export class AuthLayoutModule { }

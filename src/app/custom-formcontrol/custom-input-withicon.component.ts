@@ -29,7 +29,11 @@ export class CustomFormcontrolComponent implements OnChanges {
     if (errors) {
       Object.keys(this.errorTypes).some(key => {
         if (errors[key]) {
+          console.log(key);
+
+          console.log(this._translate.instant(key));
           this._translate.get(key, { value: this.customErrorMessage }).subscribe(res => {
+            console.log(res)
             this.errorMessage = res;
           });
           return true;

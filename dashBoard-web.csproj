@@ -27,6 +27,7 @@
   <ItemGroup>
     <None Remove="src\app\models\task.model.ts" />
     <None Remove="src\app\models\user_profile.model.ts" />
+    <None Remove="src\app\shared\constants\constant-values.const.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
     <TypeScriptCompile Include="src\app\service\user.service_interface.ts" />
     <TypeScriptCompile Include="src\app\shared\base-service\base-gateway.service.ts" />
     <TypeScriptCompile Include="src\app\shared\base-service\handle-response.ts" />
+    <TypeScriptCompile Include="src\app\shared\constants\constant-values.const.ts" />
     <TypeScriptCompile Include="src\app\shared\route-guards\auth-guard.ts" />
     <TypeScriptCompile Include="src\app\shared\route-guards\can-active-guard.service.ts" />
     <TypeScriptCompile Include="src\app\shared\route-guards\route-auth-guard.service.ts" />

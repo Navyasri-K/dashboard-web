@@ -49,3 +49,54 @@
         }
     }
 }
+
+.custom-control-label::before {
+  position: absolute;
+  top: .125rem;
+  left: -1.75rem;
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  content: '';
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  background-color: #fff;
+}
+
+.custom-control-label::after {
+  position: absolute;
+  top: .125rem;
+  left: -1.75rem;
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  content: '';
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+.custom-checkbox .custom-control-input ~ .custom-control-label {
+  font-size: .875rem;
+  cursor: pointer;
+}
+
+.custom-control-label {
+  margin-bottom: 0;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  background-color: #5e72e4;
+  box-shadow: none;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: $custom-radio-indicator-icon-checked;
+}

@@ -5,6 +5,19 @@
 .top-mrg {
   margin-top: 103px !important;
 }
+
 p {
   outline: none;
+}
+
+.field-warnging-icon, .field-errortext-color {
+  color: red;
+  padding-right: 10px;
+  padding-left: 3px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 500;
+  overflow-wrap: break-word;
 }

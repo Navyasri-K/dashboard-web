@@ -22,7 +22,7 @@ import { PubSubService } from './pub-sub/pub_sub.service';
 import { PubSubModule } from './pub-sub/pub_sub.module';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient, './assests/ui/', '.json');
+  return new TranslateHttpLoader(httpClient, './assets/ui/', '.json');
 }
 
 @NgModule({
