@@ -38,6 +38,9 @@ export class CustomValidatorDirective implements Validator {
       return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredEmailId': true } : !emailRegExp.test(fControl.value) ? { 'InvalidEmailId': true } : null;
 
     if (formControlName == "passwwordControl" && fControl.value != undefined)
-      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredPassword': true } /*: !pwdRegExp.test(fControl.value) ? { 'InvalidPassword': true }*/ : null;
+      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredPassword': true } : null;
+
+    if (formControlName == "regPasswwordControl" && fControl.value != undefined)
+      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredPassword': true } : !pwdRegExp.test(fControl.value) ? { 'invalidpassword': true } : null;
   }
 }

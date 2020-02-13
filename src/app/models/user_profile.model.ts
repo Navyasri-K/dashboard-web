@@ -2,6 +2,7 @@ export class UserProfileModel {
   userID: number;
   emailID: string;
   password: string;
+  confirmPassword: string;
   ipAddress: string;
   name: string;
   firstName: string;

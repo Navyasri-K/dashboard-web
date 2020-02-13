@@ -19,8 +19,12 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="src\app\pages\ePay\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="src\app\pages\ePay\**" />
+    <EmbeddedResource Remove="src\app\pages\ePay\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="src\app\pages\ePay\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -52,7 +56,6 @@
   <ItemGroup>
     <Folder Include="src\app\pages\correspondence\" />
     <Folder Include="src\app\pages\disbursement\" />
-    <Folder Include="src\app\pages\ePay\" />
     <Folder Include="src\app\pages\administration\" />
     <Folder Include="src\app\pages\recovery\" />
     <Folder Include="src\app\pages\payment-processing\" />

@@ -2,7 +2,7 @@
 <div class="container mt--8 pb-5 top-mrg">
   <!-- Table -->
   <div class="row justify-content-center">
-    <div class="col-lg-6 col-md-8">
+    <div class="col-lg-5 col-md-5">
       <div class="card bg-secondary shadow border-0">
         <div class="card-header bg-transparent">
           <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
@@ -17,11 +17,11 @@
             </a>
           </div>
         </div>
-        <div class="card-body px-lg-5 py-lg-5">
+        <div class="card-body px-lg-5">
           <div class="text-center text-muted mb-4">
             <small>Or sign up with credentials</small>
           </div>
-          <form role="form">
+          <form novalidate #signUpForm="ngForm" id="signUpForm" role="form">
             <div class="row">
               <div class="col-11">
                 <custom-input-withicon [labelText]="''"
@@ -47,14 +47,14 @@
               <div class="col-11">
                 <custom-input-withicon [labelText]="''"
                                        [iconStyle]="'ni ni-lock-circle-open'"
-                                       [formControlErrors]="passwwordControl.errors"
+                                       [formControlErrors]="regPasswwordControl.errors"
                                        [errorTypes]="{RequiredPassword: '', InvalidPassword: ''}">
                   <input class="form-control form-txt"
-                         name="passwwordControl"
-                         id="passwwordControlId"
+                         name="regPasswwordControl"
+                         id="regPasswwordControlId"
                          placeholder="Password"
                          type="password"
-                         #passwwordControl="ngModel"
+                         #regPasswwordControl="ngModel"
                          [(ngModel)]="userInfo && userInfo.password"
                          appCustomValidator autocomplete="off">
                 </custom-input-withicon>
@@ -77,7 +77,7 @@
                          placeholder="Confirm Password"
                          type="password"
                          #confirmPasswwordControl="ngModel"
-                         [(ngModel)]="userInfo && userInfo.password"
+                         [(ngModel)]="userInfo && userInfo.confirmPassword"
                          appCustomValidator autocomplete="off">
                 </custom-input-withicon>
               </div>
@@ -87,7 +87,14 @@
                    data-placement="left"></i>
               </div>
             </div>
-            <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
+            <div class="text-muted font-italic">
+              <small>
+                Password strength:
+                <span class="text-success font-weight-700">
+                  strong
+                </span>
+              </small>
+            </div>
             <div class="row my-4">
               <div class="col-12">
                 <div class="custom-control custom-control-alternative custom-checkbox">

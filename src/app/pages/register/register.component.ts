@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   passwordPolicy: string ="To break lines &#013; in a text, &#013; use the element., &#013; use the element., &#013; use the element.";
   confirmPwdPolicy: string = "To break lines<br>in a text,<br>use the br element.";
 
-  @ViewChild('loginForm', { static: false }) form;
+  @ViewChild('signUpForm', { static: false }) form;
 
   constructor(private router: Router,
     private _userService: UserService,
@@ -25,17 +25,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    var tooltip = require('tooltip');
+    //var tooltip = require('tooltip');
 
-    var config = {
-      showDelay: 100,
-      style: {
-        padding: 5
-      },
-      className:"customtooltip"
-    }
+    //var config = {
+    //  showDelay: 100,
+    //  style: {
+    //    padding: 5
+    //  },
+    //  className:"customtooltip"
+    //}
 
-    tooltip(config)
+    //tooltip(config)
   }
 
   ngOnDestroy() {
@@ -56,6 +56,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.form.controls['passwwordControl'].setErrors({ RequiredPassword: true });
     else
       this.form.controls['passwwordControl'].setErrors(null);
+
+    if (String.IsNullOrWhiteSpace(this.userInfo.confirmPassword) || this.userInfo.password == undefined || this.userInfo.password != this.userInfo.confirmPassword)
+      this.form.controls['confirmPasswwordControl'].setErrors({ RequiredPassword: true });
+    else
+      this.form.controls['confirmPasswwordControl'].setErrors(null);
 
     if (this.form.valid) {
 
