@@ -8,6 +8,8 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { CustomValidatorDirective } from '../custom-directives/custom-validator.directive';
 import { CustomFormcontrolComponent } from '../custom-formcontrol/custom-input-withicon.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { CustomControlComponent } from '../custom-formcontrol/custom-input.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
@@ -16,15 +18,18 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     HttpClientModule,
     NgbModule,
+    TextMaskModule
   ],
   declarations: [
     CustomValidatorDirective,
-    CustomFormcontrolComponent
+    CustomFormcontrolComponent,
+    CustomControlComponent
   ],
   exports: [
     TranslateModule,
     CustomValidatorDirective,
-    CustomFormcontrolComponent
+    CustomFormcontrolComponent,
+    CustomControlComponent
   ]
 })
 export class PubSubModule {

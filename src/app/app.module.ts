@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { ToastrModule } from 'ngx-toastr';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { AppComponent } from "./app.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
@@ -43,6 +44,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     }),
     PubSubModule.forRoot(),
+    TextMaskModule,
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
   providers: [

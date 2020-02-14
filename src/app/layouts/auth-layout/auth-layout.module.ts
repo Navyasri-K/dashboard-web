@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthLayoutRoutes } from './auth-layout.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
@@ -18,7 +19,8 @@ import { ResetpasswordComponent } from '../../pages/resetpassword/resetpassword.
     FormsModule,
     PubSubModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    TextMaskModule
   ],
   declarations: [
     LoginComponent,

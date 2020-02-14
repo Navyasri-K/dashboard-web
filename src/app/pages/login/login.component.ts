@@ -4,6 +4,7 @@ import { UserProfileModel } from '../../models/user_profile.model';
 import { UserService } from '../../service/user.service';
 import { String } from 'typescript-string-operations';
 import { ConstantValues } from '../../shared/constants/constant-values.const';
+import { PubSubService } from '../../pub-sub/pub_sub.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
     private _userService: UserService,
-    private _changeDetectRef: ChangeDetectorRef) {
+    private _changeDetectRef: ChangeDetectorRef,
+    private _pubSubServie:PubSubService,) {
   }
 
   ngOnInit() {
@@ -39,15 +41,29 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.form.controls['emailIdControl'].setErrors(null);
 
     if (String.IsNullOrWhiteSpace(this.userInfo.password) || this.userInfo.password == undefined)
-      this.form.controls['passwwordControl'].setErrors({ RequiredPassword: true });
+      this.form.controls['passwordControl'].setErrors({ RequiredPassword: true });
     else
-      this.form.controls['passwwordControl'].setErrors(null);
+      this.form.controls['passwordControl'].setErrors(null);
 
     if (this.form.valid) {
 
       let response = await this._userService.login(this.userInfo.emailID, this.userInfo.password);
 
-      this.router.navigate(['/dashboard']);
+      if (response.isSuccess) {
+        alert(response.returnMessage);
+        this.userInfo.userID = response.data.userID;
+        this._pubSubServie.setUserProfile(this.userInfo);
+        this._pubSubServie.setToken(response.data.token);
+
+        this.router.navigate(['/dashboard']);
+
+        this.form.reset();
+
+        this._changeDetectRef.detectChanges();
+      }
+      else {
+        alert('Error in register user');
+      }
 
       this.form.reset();
 

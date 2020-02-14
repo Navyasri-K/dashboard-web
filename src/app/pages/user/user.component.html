@@ -1,138 +1,174 @@
 
-<div class=" content">
-  <div class=" row">
-    <div class=" col-md-8">
-      <div class=" card">
-        <div class=" card-header">
-          <h5 class=" title">Edit Profile</h5>
+<div class="content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Edit Profile</h5>
         </div>
-        <div class=" card-body">
-          <form>
-            <div class=" row">
-              <div class=" col-md-5 pr-md-1">
-                <div class=" form-group">
-                  <label> Company</label>
-                  <input class=" form-control"
-                         disabled=""
-                         placeholder="Company"
-                         type="text"
-                         value="Khumbu Systems Inc." />
-                </div>
+        <div class="card-body">
+          <form novalidate #userProfile="ngForm" id="userProfile" role="form">
+            <div class="row">
+              <div class="col-md-6 px-md-3">
+                <custom-input [labelText]="'Email address'">
+                  <input class="form-control form-txt"
+                         name="emailIdCtrl"
+                         id="emailIdCtrlId"
+                         placeholder="Email id"
+                         type="email"
+                         #emailIdCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.emailID"
+                         autocomplete="off" readonly>
+
+                </custom-input>
               </div>
-              <div class=" col-md-3 px-md-1">
-                <div class=" form-group">
-                  <label> Username </label>
-                  <input class=" form-control"
-                         placeholder="Username"
+              <div class="col-md-4 pl-md-1">
+                <custom-input [labelText]="'Designation'">
+                  <input class="form-control form-txt"
+                         name="designationCtrl"
+                         id="designationCtrlId"
+                         placeholder="Designation"
                          type="text"
-                         value="navyasri.gurram" />
-                </div>
-              </div>
-              <div class=" col-md-4 pl-md-1">
-                <div class=" form-group">
-                  <label for="exampleInputEmail1"> Email address </label>
-                  <input class=" form-control"
-                         placeholder="navyasri.gurram@gmail.com"
-                         type="email" />
-                </div>
+                         #designationCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.designation"
+                         appCustomValidator autocomplete="off">
+
+                </custom-input>
               </div>
             </div>
-            <div class=" row">
-              <div class=" col-md-6 pr-md-1">
-                <div class=" form-group">
-                  <label> First Name </label>
-                  <input class=" form-control"
-                         placeholder="Company"
+            <div class="row">
+              <div class="col-md-6 pr-md-1">
+                <custom-input [labelText]="'First Name'"
+                              [formCtrlErrors]="firstNameCtrl.errors"
+                              [errorTypes]="{RequiredFirstName: ''}">
+                  <input class="form-control form-txt"
+                         name="firstNameCtrl"
+                         id="firstNameCtrlId"
+                         placeholder="First Name"
                          type="text"
-                         value="Navya" />
-                </div>
+                         #firstNameCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.firstName"
+                         (keyPress)="allowOnlyAlpha($event)"
+                         appCustomValidator autocomplete="off">
+
+                </custom-input>
               </div>
-              <div class=" col-md-6 pl-md-1">
-                <div class=" form-group">
-                  <label> Last Name </label>
-                  <input class=" form-control"
+              <div class="col-md-6 pl-md-1">
+                <custom-input [labelText]="'Last Name'"
+                              [formCtrlErrors]="lastNameCtrl.errors"
+                              [errorTypes]="{RequiredLastName: ''}">
+                  <input class="form-control form-txt"
+                         name="lastNameCtrl"
+                         id="lastNameCtrlId"
                          placeholder="Last Name"
                          type="text"
-                         value="Sri" />
-                </div>
+                         #lastNameCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.lastName"
+                         appCustomValidator autocomplete="off">
+
+                </custom-input>
               </div>
             </div>
-            <div class=" row">
-              <div class=" col-md-12">
-                <div class=" form-group">
-                  <label> Address </label>
-                  <input class=" form-control"
-                         placeholder="Home Address"
+            <div class="row">
+              <div class="col-md-12">
+                <custom-input [labelText]="'Address'">
+                  <input class="form-control form-txt"
+                         name="addressCtrl"
+                         id="addressCtrlId"
+                         placeholder="Address Details"
                          type="text"
-                         value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" />
-                </div>
+                         #addressCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.address"
+                         appCustomValidator autocomplete="off">
+
+                </custom-input>
               </div>
             </div>
-            <div class=" row">
-              <div class=" col-md-4 pr-md-1">
-                <div class=" form-group">
-                  <label> City </label>
-                  <input class=" form-control"
+            <div class="row">
+              <div class="col-md-4 pr-md-1">
+                <custom-input [labelText]="'City'">
+                  <input class="form-control form-txt"
+                         name="cityCtrl"
+                         id="cityCtrlId"
                          placeholder="City"
                          type="text"
-                         value="Hyderabad" />
-                </div>
+                         #cityCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.city"
+                         appCustomValidator autocomplete="off">
+
+                </custom-input>
               </div>
-              <div class=" col-md-4 px-md-1">
-                <div class=" form-group">
-                  <label> Country </label>
-                  <input class=" form-control"
+              <div class="col-md-4 px-md-1">
+                <custom-input [labelText]="'Country'">
+                  <input class="form-control form-txt"
+                         name="countryCtrl"
+                         id="countryCtrlId"
                          placeholder="Country"
                          type="text"
-                         value="India" />
-                </div>
+                         #countryCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.countryCode"
+                         appCustomValidator autocomplete="off">
+
+                </custom-input>
               </div>
-              <div class=" col-md-4 pl-md-1">
-                <div class=" form-group">
-                  <label> Postal Code </label>
-                  <input class=" form-control"
-                         placeholder="ZIP Code"
-                         type="number" />
-                </div>
+              <div class="col-md-4 pl-md-1">
+                <custom-input [labelText]="'Postal Code'">
+                  <input class="form-control form-txt"
+                         name="postalCodeCtrl"
+                         id="postalCodeCtrlId"
+                         placeholder="Postal Code"
+                         type="text"
+                         #postalCodeCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.zipCode"
+                         appCustomValidator autocomplete="off">
+
+                </custom-input>
               </div>
             </div>
-            <div class=" row">
-              <div class=" col-md-8">
-                <div class=" form-group">
-                  <label> About Me </label>
-                  <textarea class=" form-control"
-                            cols="80"
-                            placeholder="Here can be your description"
-                            rows="4">Working as a Software developer</textarea>
-                </div>
+            <div class="row">
+              <div class="col-md-8">
+                <custom-input [labelText]="'About Me'"
+                              [formCtrlErrors]="aboutMeCtrl.errors"
+                              [errorTypes]="{RequiredAboutMe: ''}">
+                  <textarea class="form-control form-txt"
+                            name="aboutMeCtrl"
+                            id="aboutMeCtrlId"
+                            placeholder="About yourself"
+                            type="text"
+                            #aboutMeCtrl="ngModel"
+                            [(ngModel)]="userInfo && userInfo.aboutMe"
+                            appCustomValidator autocomplete="off"></textarea>
+
+                </custom-input>
               </div>
             </div>
           </form>
         </div>
-        <div class=" card-footer">
-          <button class=" btn btn-fill btn-danger" type="submit">
+        <div class="card-footer">
+          <button class="btn btn-fill btn-danger" type="button"
+                  (click)="saveUserProfile()">
             Save
           </button>
         </div>
       </div>
     </div>
-    <div class=" col-md-4">
-      <div class=" card card-user">
-        <div class=" card-body">
-          <p class=" card-text"></p>
-          <div class=" author">
-            <div class=" block block-one"></div>
-            <div class=" block block-two"></div>
-            <div class=" block block-three"></div>
-            <div class=" block block-four"></div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="card-body">
+          <p class="card-text"></p>
+          <div class="author">
+            <div class="block block-one"></div>
+            <div class="block block-two"></div>
+            <div class="block block-three"></div>
+            <div class="block block-four"></div>
             <a href="javascript:void(0)">
-              <img alt="..." class=" avatar" src="assets/img/emilyz.jpg" />
-              <h5 class=" title">Navyasri Gurram</h5>
+              <img alt="..." class="avatar" src="assets/img/emilyz.jpg" />
+              <h5 class="title">{{userInfo && userInfo.userName}}</h5>
             </a>
-            <p class=" description">Full Stack Developer</p>
+            <p class="description">{{userInfo && userInfo.designation}}</p>
           </div>
-          <div class=" card-description">
-            Believe in yourself! Have faith in your abilities! Without a humble but reasonable confidence in your own powers you can not be succesfull o hapyy...
+          <div class="card-description">
+            {{userInfo && userInfo.aboutMe}}
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
@@ -32,6 +33,7 @@ import { PubSubModule } from '../../pub-sub/pub_sub.module';
     PubSubModule,
     HttpClientModule,
     NgbModule,
+    TextMaskModule
   ],
   declarations: [
     DashboardComponent,

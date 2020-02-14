@@ -10,4 +10,18 @@ export class ConstantValues {
    One special character
    minimum 15 digits*/
   public static passwordFormat: string = '^(?=.{10,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$';
+
+  public static alphaStringReg: string = '^a-zA-Z+$';
+
+  public static allowOnlyAlpha(evevnt: any) {
+
+    const alpha = new RegExp(this.alphaStringReg);
+
+    let inputChar = String.fromCharCode(evevnt.charCode);
+
+    if (!alpha.test(inputChar)) {
+      event.preventDefault();
+      return;
+    }
+  }
 }

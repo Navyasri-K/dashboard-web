@@ -31,7 +31,7 @@ export class UserService extends BaseGatewayService {
 
     let headers = new HttpHeaders();
 
-    //headers = headers.set('Authorization', `Bearer ${this, this.token}`);
+    headers = headers.set('Authorization', `Bearer ${this, this.token}`);
 
     if (this.HttpOptions)
       this.HttpOptions.headers = headers;
@@ -56,20 +56,36 @@ export class UserService extends BaseGatewayService {
       return responseData.response;
   }
 
-  async signUp(emailId, password) {
+  async signUp(UserName, emailId, password, RoleBits63) {
 
     this.setConigValues();
 
     let body = {
       EmailId: emailId,
-      Password: password
+      UserName: UserName,
+      Password: password,
+      RoleBits63: RoleBits63
     };
 
     let params = new HttpParams();
 
     this.HttpOptions.params = params;
 
-    let responseData = this.post('/api/auth/signup', body, this.HttpOptions);
+    let responseData = this.post('/api/auth/register', body, this.HttpOptions);
+
+    if (responseData.statusCode == '200')
+      return responseData.response;
+  }
+
+  async updateUserProfile(userProfile) {
+
+    this.setConigValues();
+
+    let params = new HttpParams();
+
+    this.HttpOptions.params = params;
+
+    let responseData = this.post('/api/auth/update:userProfile', userProfile, this.HttpOptions);
 
     if (responseData.statusCode == '200')
       return responseData.response;

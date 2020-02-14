@@ -2,13 +2,12 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'custom-input-withicon',
-  templateUrl: './custom-input-withicon.component.html'
+  selector: 'custom-input',
+  templateUrl: './custom-input.component.html'
 })
-export class CustomFormcontrolComponent implements OnChanges {
-  @Input() iconStyle: string;
+export class CustomControlComponent implements OnChanges {
   @Input() labelText: string = '';
-  @Input() formControlErrors: any | undefined;
+  @Input() formCtrlErrors: any | undefined;
   @Input() errorTypes: any;
   errorMessage: string = '';
 
@@ -18,7 +17,7 @@ export class CustomFormcontrolComponent implements OnChanges {
 
   ngOnChanges(changes: any) {
 
-    let errors: any = changes.formControlErrors == undefined ? null : changes.formControlErrors.currentValue;
+    let errors: any = changes.formCtrlErrors == undefined ? null : changes.formCtrlErrors.currentValue;
 
     this.errorMessage = '';
 

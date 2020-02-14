@@ -4,7 +4,7 @@ export class UserProfileModel {
   password: string;
   confirmPassword: string;
   ipAddress: string;
-  name: string;
+  userName: string;
   firstName: string;
   lastName: string;
   mobileNumber: number;

@@ -124,3 +124,101 @@
 .showbs-tooltip-left{
     color:red;
 }
+
+
+/* The container */
+.smart-checkbox {
+  padding-left: 16px;
+  font-weight: 500;
+  font-size: 13px;
+  font-family: 'Roboto';
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  margin-left: 10px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.smart-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+
+/* On mouse-over, add a grey background color */
+.smart-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.smart-checkbox input:checked ~ .checkmark {
+  background-color: rgba(0, 123, 255, 1);
+  border: none;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.smart-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.smart-checkbox .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 8px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+.form-check-input.smart-checks {
+  margin: 2px -15px 0;
+  cursor: pointer;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 13px;
+}
+
+
+/* Create a custom checkbox */
+.checkmark {
+  border-width: 0px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 22px;
+  height: 22px;
+  background: inherit;
+  background-color: rgba(255, 255, 255, 1);
+  box-sizing: border-box;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgba(169, 169, 169, 1);
+  border-radius: 6px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-family: 'Zapf Dingbats Regular', 'Zapf Dingbats';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  color: #FFFFFF;
+  line-height: 15px;
+}

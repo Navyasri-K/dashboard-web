@@ -4,6 +4,8 @@ import { UserProfileModel } from '../../models/user_profile.model';
 import { UserService } from '../../service/user.service';
 import { ConstantValues } from '../../shared/constants/constant-values.const';
 import { String } from 'typescript-string-operations';
+import { tick } from '@angular/core/testing';
+import { PubSubService } from '../../pub-sub/pub_sub.service';
 
 @Component({
   selector: 'app-register',
@@ -13,14 +15,18 @@ import { String } from 'typescript-string-operations';
 export class RegisterComponent implements OnInit, OnDestroy {
 
   userInfo = new UserProfileModel();
-  passwordPolicy: string ="To break lines &#013; in a text, &#013; use the element., &#013; use the element., &#013; use the element.";
+  passwordPolicy: string = "To break lines &#013; in a text, &#013; use the element., &#013; use the element., &#013; use the element.";
   confirmPwdPolicy: string = "To break lines<br>in a text,<br>use the br element.";
+
+  acceptPolicy: boolean = false;
+  showErrorPolicy: string;
 
   @ViewChild('signUpForm', { static: false }) form;
 
   constructor(private router: Router,
     private _userService: UserService,
-    private _changeDetectRef: ChangeDetectorRef) {
+    private _changeDetectRef: ChangeDetectorRef,
+  private _pubSubServie:PubSubService) {
   }
 
   ngOnInit() {
@@ -44,6 +50,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   async signUpOkClick() {
 
     let emailRegExp = new RegExp(ConstantValues.emailIdFormat);
+    let pwdRegExp = new RegExp(ConstantValues.passwordFormat);
+
+    if (String.IsNullOrWhiteSpace(this.userInfo.userName) || this.userInfo.userName == undefined)
+      this.form.controls['userNameControl'].setErrors({ RequiredUserName: true });
+    else
+      this.form.controls['userNameControl'].setErrors(null);
 
     if (String.IsNullOrWhiteSpace(this.userInfo.emailID) || this.userInfo.emailID == undefined)
       this.form.controls['emailIdControl'].setErrors({ RequiredEmailId: true });
@@ -53,28 +65,45 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.form.controls['emailIdControl'].setErrors(null);
 
     if (String.IsNullOrWhiteSpace(this.userInfo.password) || this.userInfo.password == undefined)
-      this.form.controls['passwwordControl'].setErrors({ RequiredPassword: true });
+      this.form.controls['regPasswordControl'].setErrors({ RequiredPassword: true });
+    else if (!pwdRegExp.test(this.userInfo.password))
+      this.form.controls['regPasswordControl'].setErrors({ InvalidRegPassword: true });
     else
-      this.form.controls['passwwordControl'].setErrors(null);
+      this.form.controls['regPasswordControl'].setErrors(null);
 
     if (String.IsNullOrWhiteSpace(this.userInfo.confirmPassword) || this.userInfo.password == undefined || this.userInfo.password != this.userInfo.confirmPassword)
-      this.form.controls['confirmPasswwordControl'].setErrors({ RequiredPassword: true });
+      this.form.controls['confirmPasswordControl'].setErrors({ MismatchPasswordConfirmPassword: true });
     else
-      this.form.controls['confirmPasswwordControl'].setErrors(null);
+      this.form.controls['confirmPasswordControl'].setErrors(null);
+
+    if (!this.acceptPolicy)
+      this.showErrorPolicy = "Agree to the policy and sign up.";
+    else
+      this.showErrorPolicy = undefined;
 
     if (this.form.valid) {
 
-      let response = await this._userService.login(this.userInfo.emailID, this.userInfo.password);
+      let response = await this._userService.signUp(this.userInfo.userName, this.userInfo.emailID, this.userInfo.password, 0);
 
-      console.log(response);
+      if (response.isSuccess) {
+        alert(response.returnMessage);
+        this.userInfo.userID = response.data.userID;
+        this._pubSubServie.setUserProfile(this.userInfo);
+        this._pubSubServie.setToken(response.data.token);
 
-      this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']);
 
-      this.form.reset();
+        this.form.reset();
 
-      this._changeDetectRef.detectChanges();
-
-      this.router.navigate(['/login']);
+        this._changeDetectRef.detectChanges();
+      }
+      else {
+        alert('Error in register user');
+      }
     }
+  }
+
+  acceptPolicyClick() {
+    this.acceptPolicy = !this.acceptPolicy;
   }
 }

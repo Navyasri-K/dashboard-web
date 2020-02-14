@@ -1,0 +1,15 @@
+<div>
+  <label class="field-label">
+    {{labelText}}
+  </label>
+  <div class="form-group field-form-group"
+       [ngClass]="{'has-error':errorMessage}">
+    <ng-content autocomplete="off"></ng-content>
+    <span class=" fa fa-exclamation-triangle field-warnging-icon"
+          *ngIf="errorMessage"
+          title="{{errorMessage}}">
+    </span>
+    <span class="field-label" *ngIf="!errorMessage">&nbsp;</span>
+    <span class="field-errortext-color field-label" *ngIf="errorMessage">{{errorMessage | translate}}</span>
+  </div>
+</div>

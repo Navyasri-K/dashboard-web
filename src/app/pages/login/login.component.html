@@ -38,14 +38,14 @@
             </custom-input-withicon>
             <custom-input-withicon [labelText]="''"
                                    [iconStyle]="'ni ni-lock-circle-open'"
-                                   [formControlErrors]="passwwordControl.errors"
+                                   [formControlErrors]="passwordControl.errors"
                                    [errorTypes]="{RequiredPassword: '', InvalidPassword: ''}">
               <input class="form-control form-txt"
-                     name="passwwordControl"
-                     id="passwwordControlId"
+                     name="passwordControl"
+                     id="passwordControlId"
                      placeholder="Password"
                      type="password"
-                     #passwwordControl="ngModel"
+                     #passwordControl="ngModel"
                      [(ngModel)]="userInfo && userInfo.password"
                      appCustomValidator autocomplete="off">
             </custom-input-withicon>

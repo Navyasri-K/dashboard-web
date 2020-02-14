@@ -4,6 +4,12 @@
   "RequiredPassword": "Enter a Password",
   "InvalidRegisterEmailId": "Choose an email address",
   "InvalidPassword": "Wrong password. Try again or click forgot password to reset it.",
+  "InvalidRegPassword": "Password does nopt meet the policy. Try again.",
   "RequiredConfirmPassword": "Confrim your password.",
-  "MismatchPasswordConfirmPassword": "Password and confirm password didnt match. Try again"
+  "MismatchPasswordConfirmPassword": "Password and confirm password didnt match. Try again",
+  "RequiredUserName": "Required User Name.",
+  "RequiredAboutMe": "This should not be empty. Write something about yourself.",
+  "RequiredFirstName": "Enter a valid First Name",
+  "RequiredLastName": "Enter a valid Last Name"
+
 }

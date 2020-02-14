@@ -26,6 +26,27 @@
               <div class="col-11">
                 <custom-input-withicon [labelText]="''"
                                        [iconStyle]="'ni ni-email-83'"
+                                       [formControlErrors]="userNameControl.errors"
+                                       [errorTypes]="{RequiredUserName: ''}">
+                  <input class="form-control form-txt"
+                         name="userNameControl"
+                         id="userNameControlId"
+                         placeholder="Email"
+                         type="email"
+                         #userNameControl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.userName"
+                         appCustomValidator autocomplete="off">
+                </custom-input-withicon>
+              </div>
+              <div class="col-1">
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-11">
+                <custom-input-withicon [labelText]="''"
+                                       [iconStyle]="'ni ni-email-83'"
                                        [formControlErrors]="emailIdControl.errors"
                                        [errorTypes]="{RequiredEmailId: '', InvalidEmailId: ''}">
                   <input class="form-control form-txt"
@@ -34,7 +55,7 @@
                          placeholder="Email"
                          type="email"
                          #emailIdControl="ngModel"
-                         [(ngModel)]="userInfo && userInfo.emailId"
+                         [(ngModel)]="userInfo && userInfo.emailID"
                          appCustomValidator autocomplete="off">
                 </custom-input-withicon>
               </div>
@@ -47,14 +68,14 @@
               <div class="col-11">
                 <custom-input-withicon [labelText]="''"
                                        [iconStyle]="'ni ni-lock-circle-open'"
-                                       [formControlErrors]="regPasswwordControl.errors"
-                                       [errorTypes]="{RequiredPassword: '', InvalidPassword: ''}">
+                                       [formControlErrors]="regPasswordControl.errors"
+                                       [errorTypes]="{RequiredPassword: '', InvalidRegPassword: ''}">
                   <input class="form-control form-txt"
-                         name="regPasswwordControl"
-                         id="regPasswwordControlId"
+                         name="regPasswordControl"
+                         id="regPasswordControlId"
                          placeholder="Password"
                          type="password"
-                         #regPasswwordControl="ngModel"
+                         #regPasswordControl="ngModel"
                          [(ngModel)]="userInfo && userInfo.password"
                          appCustomValidator autocomplete="off">
                 </custom-input-withicon>
@@ -69,14 +90,14 @@
               <div class="col-11">
                 <custom-input-withicon [labelText]="''"
                                        [iconStyle]="'ni ni-lock-circle-open'"
-                                       [formControlErrors]="confirmPasswwordControl.errors"
-                                       [errorTypes]="{RequiredPassword: '', InvalidPassword: ''}">
+                                       [formControlErrors]="confirmPasswordControl.errors"
+                                       [errorTypes]="{MismatchPasswordConfirmPassword: ''}">
                   <input class="form-control form-txt"
-                         name="confirmPasswwordControl"
-                         id="confirmPasswwordControlId"
+                         name="confirmPasswordControl"
+                         id="confirmPasswordControlId"
                          placeholder="Confirm Password"
                          type="password"
-                         #confirmPasswwordControl="ngModel"
+                         #confirmPasswordControl="ngModel"
                          [(ngModel)]="userInfo && userInfo.confirmPassword"
                          appCustomValidator autocomplete="off">
                 </custom-input-withicon>
@@ -97,12 +118,16 @@
             </div>
             <div class="row my-4">
               <div class="col-12">
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                  <label class="custom-control-label" for="customCheckRegister">
-                    <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                  </label>
-                </div>
+                <label class="smart-checkbox text-center text-muted">
+                  <input type="checkbox" class="form-check-input smart-checks checkmark" name="policyCheckmark"
+                         [(ngModel)]="acceptPolicy"
+                         (click)="acceptPolicyClick()" />
+                  I agree with the <a href="#!">Privacy Policy</a>
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-12">
+                <span class="field-errortext-color field-label" *ngIf="!acceptPolicy">{{showErrorPolicy}}</span>
               </div>
             </div>
             <div class="text-center">
