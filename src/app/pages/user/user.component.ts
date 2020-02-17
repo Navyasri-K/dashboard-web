@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from "@angular/core";
-import { UserProfileModel, UserProfileRequestModel } from '../../models/user_profile.model';
+import { UserProfileModel } from '../../models/user_profile.model';
 import { PubSubService } from '../../pub-sub/pub_sub.service';
 import { UserService } from '../../service/user.service';
 import { ConstantValues } from '../../shared/constants/constant-values.const';
