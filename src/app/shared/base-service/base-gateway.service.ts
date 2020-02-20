@@ -21,6 +21,21 @@ export abstract class BaseGatewayService {
 
   }
 
+  getJson(relativeUrl: string, _httpOptions?: any) {
+
+    var response = this.http.get(relativeUrl, _httpOptions)
+      .pipe(
+        catchError(error => this.handleRequiredErrorResponse(error))
+      ).toPromise();
+
+    var responseData = new ResponseData();
+
+    responseData.statusCode = "200";
+    responseData.response = response;
+
+    return responseData;
+  }
+
   get(relativeUrl: string, _httpOptions?: any) {
     if (!this.baseGateway_url)
       this.setBaseUrl();

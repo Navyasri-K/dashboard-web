@@ -50,6 +50,7 @@ export class UserService extends BaseGatewayService {
 
     this.HttpOptions.params = params;
 
+    //let responseData = this.getJson('../../assets/ui/com.messages.json', this.HttpOptions);
     let responseData = this.post('/api/auth/login', body, this.HttpOptions);
 
     if (responseData.statusCode == '200')
