@@ -11,15 +11,11 @@ const routes: Routes = [
     path: "",
     redirectTo: "login",
     pathMatch: "full"
-  }, {
+  },
+  {
     path: '',
     component: AuthLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
-      }
-    ]
+    loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
   },
   {
     path: "",
@@ -31,10 +27,10 @@ const routes: Routes = [
           "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"
       }
     ]
-  }, 
+  },
   {
     path: "**",
-    redirectTo: "dashboard"
+    redirectTo: "login"
   }
 ];
 
@@ -48,4 +44,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

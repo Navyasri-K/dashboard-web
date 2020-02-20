@@ -7,11 +7,19 @@ export class PubSubService {
 
   public token: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
+  /**
+   * set and share user details
+   * @param value
+   */
   setUserProfile(value) {
     console.log(value);
     this.userInfo.next(value);
   }
 
+  /**
+   * set and share token value
+   * @param value
+   */
   setToken(value) {
     this.token.next(value);
   }

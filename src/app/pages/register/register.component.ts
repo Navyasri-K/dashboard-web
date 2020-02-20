@@ -4,8 +4,8 @@ import { UserProfileModel } from '../../models/user_profile.model';
 import { UserService } from '../../service/user.service';
 import { ConstantValues } from '../../shared/constants/constant-values.const';
 import { String } from 'typescript-string-operations';
-import { tick } from '@angular/core/testing';
 import { PubSubService } from '../../pub-sub/pub_sub.service';
+import { NotificationsService } from '../../service/notifications.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +26,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private _userService: UserService,
     private _changeDetectRef: ChangeDetectorRef,
-  private _pubSubServie:PubSubService) {
+    private _pubSubServie: PubSubService,
+    private _notificationUserIns: NotificationsService) {
   }
 
   ngOnInit() {
@@ -52,10 +53,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     let emailRegExp = new RegExp(ConstantValues.emailIdFormat);
     let pwdRegExp = new RegExp(ConstantValues.passwordFormat);
 
-    if (String.IsNullOrWhiteSpace(this.userInfo.userName) || this.userInfo.userName == undefined)
-      this.form.controls['userNameControl'].setErrors({ RequiredUserName: true });
+    if (String.IsNullOrWhiteSpace(this.userInfo.firstName) || this.userInfo.firstName == undefined)
+      this.form.controls['userFirstNameControl'].setErrors({ RequiredFirstName: true });
     else
-      this.form.controls['userNameControl'].setErrors(null);
+      this.form.controls['userFirstNameControl'].setErrors(null);
+
+    if (String.IsNullOrWhiteSpace(this.userInfo.lastName) || this.userInfo.lastName == undefined)
+      this.form.controls['userLastNameControl'].setErrors({ RequiredLastName: true });
+    else
+      this.form.controls['userLastNameControl'].setErrors(null);
 
     if (String.IsNullOrWhiteSpace(this.userInfo.emailID) || this.userInfo.emailID == undefined)
       this.form.controls['emailIdControl'].setErrors({ RequiredEmailId: true });
@@ -83,13 +89,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     if (this.form.valid) {
 
+      this.userInfo.userName = this.userInfo.firstName + ' ' + this.userInfo.lastName;
+
       let response = await this._userService.signUp(this.userInfo.userName, this.userInfo.emailID, this.userInfo.password, 0);
 
       if (response.isSuccess) {
-        alert(response.returnMessage);
+        this._notificationUserIns.showNotification('top', 'right', 1, response.returnMessage);
+
         this.userInfo.userID = response.data.userID;
-        this._pubSubServie.setUserProfile(this.userInfo);
-        this._pubSubServie.setToken(response.data.token);
+
+        let updatedUser = new UserProfileModel();
+
+        updatedUser.cloneUserInfo(this.userInfo);
+
+        await this._pubSubServie.setUserProfile(updatedUser);
+        await this._pubSubServie.setToken(response.data.token);
 
         this.router.navigate(['/dashboard']);
 

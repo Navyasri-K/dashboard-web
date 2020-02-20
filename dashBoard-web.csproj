@@ -32,6 +32,7 @@
     <None Remove="src\app\custom-formcontrol\custom-input.component.ts" />
     <None Remove="src\app\models\task.model.ts" />
     <None Remove="src\app\models\user_profile.model.ts" />
+    <None Remove="src\app\service\notifications.service.ts" />
     <None Remove="src\app\shared\constants\constant-values.const.ts" />
   </ItemGroup>
 
@@ -41,8 +42,8 @@
     <TypeScriptCompile Include="src\app\models\task.model.ts" />
     <TypeScriptCompile Include="src\app\models\user_profile.model.ts" />
     <TypeScriptCompile Include="src\app\server.ts" />
+    <TypeScriptCompile Include="src\app\service\notifications.service.ts" />
     <TypeScriptCompile Include="src\app\service\user.service.ts" />
-    <TypeScriptCompile Include="src\app\service\user.service_interface.ts" />
     <TypeScriptCompile Include="src\app\shared\base-service\base-gateway.service.ts" />
     <TypeScriptCompile Include="src\app\shared\base-service\handle-response.ts" />
     <TypeScriptCompile Include="src\app\shared\constants\constant-values.const.ts" />

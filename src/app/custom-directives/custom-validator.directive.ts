@@ -22,7 +22,7 @@ export class CustomValidatorDirective implements Validator {
     let formGroup = fControl.parent.controls;
     let formControlName = Object.keys(formGroup).filter(name => fControl === formGroup[name])[0];
 
-    let controlValue = "";
+    let controlValue = String.Empty;
 
     let emailRegExp = new RegExp(ConstantValues.emailIdFormat);
     let pwdRegExp = new RegExp(ConstantValues.passwordFormat);
@@ -36,10 +36,26 @@ export class CustomValidatorDirective implements Validator {
     if (formControlName == "passwordControl" && fControl.value != undefined)
       return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredPassword': true } : null;
 
+    if (formControlName == "userNameControl" && fControl.value != undefined)
+      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredUserName': true } : null;
+
+    if (formControlName == "userFirstNameControl" && fControl.value != undefined)
+      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredFirstName': true } : null;
+
+    if (formControlName == "userLastNameControl" && fControl.value != undefined)
+      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredLastName': true } : null;
+
+    let regPwdCtrl = formGroup['regPasswordControl'];
+
+    let regPassword = String.Empty;
+
+    if (regPwdCtrl)
+      regPassword = regPwdCtrl.value;
+
     if (formControlName == "regPasswordControl" && fControl.value != undefined)
       return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredPassword': true } : !pwdRegExp.test(fControl.value) ? { 'InvalidRegPassword': true } : null;
 
-    if (formControlName == "userNameControl" && fControl.value != undefined)
-      return String.IsNullOrWhiteSpace(fControl.value) ? { 'RequiredUserName': true } : null;
+    if (formControlName == "confirmPasswordControl" && fControl.value != undefined)
+      return regPassword != fControl.value ? { 'MismatchPasswordConfirmPassword': true } : null;
   }
 }

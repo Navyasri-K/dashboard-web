@@ -46,7 +46,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PubSubModule.forRoot(),
     TextMaskModule,
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent,
+    AuthLayoutComponent],
   providers: [
     //{ provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
     RoutingState,

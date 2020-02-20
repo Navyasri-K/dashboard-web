@@ -4,6 +4,7 @@ import { PubSubService } from '../../pub-sub/pub_sub.service';
 import { UserService } from '../../service/user.service';
 import { ConstantValues } from '../../shared/constants/constant-values.const';
 import { String } from 'typescript-string-operations';
+import { NotificationsService } from '../../service/notifications.service';
 
 @Component({
   selector: "app-user",
@@ -11,14 +12,15 @@ import { String } from 'typescript-string-operations';
 })
 export class UserComponent implements OnInit {
 
-  @ViewChild('signUpForm', { static: false }) form;
+  @ViewChild('userProfile', { static: false }) form;
 
   userInfo: UserProfileModel = new UserProfileModel();
 
   constructor(
     private _userService: UserService,
     private _changeDetectRef: ChangeDetectorRef,
-    private _pubSubService: PubSubService) { }
+    private _pubSubService: PubSubService,
+    private _notificationUserIns: NotificationsService) { }
 
   ngOnInit() {    
     this.getUserDetails();
@@ -59,10 +61,16 @@ export class UserComponent implements OnInit {
       let response = await this._userService.updateUserProfile(this.userInfo);
 
       if (response.isSuccess) {
-        alert(response.returnMessage);
+        this._notificationUserIns.showNotification('top', 'right', 1, response.returnMessage);
+
         this.userInfo.userID = response.data.userID;
-        this._pubSubService.setUserProfile(this.userInfo);
-        this._pubSubService.setToken(response.data.token);
+
+        let updatedUser = new UserProfileModel();
+
+        updatedUser.cloneUserInfo(this.userInfo);
+
+        await this._pubSubService.setUserProfile(updatedUser);
+        await this._pubSubService.setToken(response.data.token);
 
         this.form.reset();
 
