@@ -86,7 +86,7 @@ export class UserService extends BaseGatewayService {
 
     this.HttpOptions.params = params;
 
-    let responseData = this.post('/api/auth/update:userProfile', userProfile, this.HttpOptions);
+    let responseData = this.put('/api/auth/update:userProfile', userProfile, this.HttpOptions);
 
     if (responseData.statusCode == '200')
       return responseData.response;

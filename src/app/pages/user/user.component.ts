@@ -36,11 +36,6 @@ export class UserComponent implements OnInit {
 
   async saveUserProfile() {
 
-    if (String.IsNullOrWhiteSpace(this.userInfo.userName) || this.userInfo.userName == undefined)
-      this.form.controls['userNameControl'].setErrors({ RequiredUserName: true });
-    else
-      this.form.controls['userNameControl'].setErrors(null);
-
     if (String.IsNullOrWhiteSpace(this.userInfo.firstName) || this.userInfo.firstName == undefined)
       this.form.controls['firstNameCtrl'].setErrors({ RequiredFirstName: true });
     else

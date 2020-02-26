@@ -5,6 +5,7 @@ import { UserService } from '../../service/user.service';
 import { String } from 'typescript-string-operations';
 import { ConstantValues } from '../../shared/constants/constant-values.const';
 import { PubSubService } from '../../pub-sub/pub_sub.service';
+import { NotificationsService } from '../../service/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private _userService: UserService,
     private _changeDetectRef: ChangeDetectorRef,
-    private _pubSubServie:PubSubService,) {
+    private _pubSubServie: PubSubService,
+    private _notificationUserIns: NotificationsService,) {
   }
 
   ngOnInit() {
@@ -50,9 +52,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       let response = await this._userService.login(this.userInfo.emailID, this.userInfo.password);
 
       if (response.isSuccess) {
-        alert(response.returnMessage);
+
+        this._notificationUserIns.showNotification('top', 'right', 1, response.returnMessage);
+
         this.userInfo.userID = response.data.userID;
-        this._pubSubServie.setUserProfile(this.userInfo);
+
+        let updatedUser = new UserProfileModel();
+
+        updatedUser.cloneUserInfo(this.userInfo);
+        this._pubSubServie.setUserProfile(updatedUser);
         this._pubSubServie.setToken(response.data.token);
 
         this.router.navigate(['/dashboard']);
