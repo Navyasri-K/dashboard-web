@@ -44,22 +44,19 @@ export class UserProfileModel {
 
   cloneUserResponse(user) {
 
-    this.userID = user.userID;
-    this.emailID = user.emailID;
-    this.password = user.password;
-    this.confirmPassword = user.confirmPassword;
-    this.ipAddress = user.ipAddress;
+    this.userID = user.userId;
+    this.emailID = user.emailId;
     this.userName = user.userName;
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
+    this.firstName = user.userName.split(" ", 2)[0];
+    this.lastName = user.userName.split(" ", 2)[1];
     this.mobileNumber = user.mobileNumber;
     this.address = user.address;
-    this.countryCode = user.countryCode;
-    this.stateCode = user.stateCode;
+    this.countryCode = user.country;
+    this.stateCode = user.state;
     this.city = user.city;
     this.zipCode = user.zipCode;
     this.aboutMe = user.aboutMe;
     this.designation = user.designation;
-    this.profilePic = user.profilePic;
+    this.profilePic = user.profileImageBytes;
   }
 }

@@ -55,11 +55,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this._notificationUserIns.showNotification('top', 'right', 1, response.returnMessage);
 
-        this.userInfo.userID = response.data.userID;
-
         let updatedUser = new UserProfileModel();
 
-        updatedUser.cloneUserInfo(this.userInfo);
+        updatedUser.cloneUserResponse(response.data.userInfo);
         this._pubSubServie.setUserProfile(updatedUser);
         this._pubSubServie.setToken(response.data.token);
 
