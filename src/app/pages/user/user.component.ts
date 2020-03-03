@@ -5,6 +5,7 @@ import { UserService } from '../../service/user.service';
 import { ConstantValues } from '../../shared/constants/constant-values.const';
 import { String } from 'typescript-string-operations';
 import { NotificationsService } from '../../service/notifications.service';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: "app-user",
@@ -22,7 +23,7 @@ export class UserComponent implements OnInit {
     private _pubSubService: PubSubService,
     private _notificationUserIns: NotificationsService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.getUserDetails();
   }
 
@@ -78,6 +79,65 @@ export class UserComponent implements OnInit {
   }
 
   allowOnlyAlpha(event) {
-   return ConstantValues.allowOnlyAlpha(event);
+    return ConstantValues.allowOnlyAlpha(event);
+  }
+
+  imagBase64: any;
+  decryptedImagBase64: any;
+
+  updateProfilePic(event) {
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imagBase64 = reader.result;
+      
+      let data = this.imagBase64.replace("data:image/jpeg;base64,", "");
+      console.log(data);
+    
+      this.encrytpImage(data);
+    };
+
+    reader.onerror = function (error) {
+      
+    };
+  }
+
+  key = CryptoJS.enc.Utf8.parse('95847852376254S257M57I63S527M415'); // to have highly secure add 32 bytes. Key should be same as the encrypted key
+  iv = CryptoJS.enc.Utf8.parse('95847852376254S257M57I63S527M415');// always have 16 bytes
+
+  encrytpImage(data) {
+
+    var encryptedText = CryptoJS.AES.encrypt(data, this.key,
+      {
+        keySize: 128 / 8,
+        iv: this.iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+      });
+
+
+    this.userInfo.profileImageBase64 = encryptedText.toString();
+    console.log(this.userInfo.profileImageBase64);
+
+    this.decrytpImage(encryptedText)
+  }
+
+  decrytpImage(encryptedText) {
+
+    var decryptedTxt = CryptoJS.AES.decrypt(encryptedText, this.key, {
+      keySize: 128 / 8,
+      iv: this.iv,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7
+    });
+
+    let decryptedText = "";
+
+    decryptedText = decryptedTxt.toString(CryptoJS.enc.Utf8);
+
+    
+
+    this.userInfo.profilePic = decryptedText;
   }
 }

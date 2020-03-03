@@ -21,9 +21,9 @@ export abstract class BaseGatewayService {
 
   }
 
-  getJson(relativeUrl: string, _httpOptions?: any) {
+  async getJson(relativeUrl: string, _httpOptions?: any) {
 
-    var response = this.http.get(relativeUrl, _httpOptions)
+    var response = await this.http.get(relativeUrl, _httpOptions)
       .pipe(
         catchError(error => this.handleRequiredErrorResponse(error))
       ).toPromise();
@@ -36,13 +36,13 @@ export abstract class BaseGatewayService {
     return responseData;
   }
 
-  get(relativeUrl: string, _httpOptions?: any) {
+  async get(relativeUrl: string, _httpOptions?: any) {
     if (!this.baseGateway_url)
       this.setBaseUrl();
 
     this.baseGateway_url = "https://localhost:44335";
 
-    var response = this.http.get(this.baseGateway_url + relativeUrl, _httpOptions)
+    var response = await this.http.get(this.baseGateway_url + relativeUrl, _httpOptions)
       .pipe(
         catchError(error => this.handleRequiredErrorResponse(error))
       ).toPromise();
@@ -55,34 +55,13 @@ export abstract class BaseGatewayService {
     return responseData;
   }
 
-  post(relativeUrl: string, body: any, _httpOptions?: any) {
+  async post(relativeUrl: string, body: any, _httpOptions?: any) {
     if (!this.baseGateway_url)
       this.setBaseUrl();
 
     this.baseGateway_url = "https://localhost:44335";
 
-    var response = this.http.post(this.baseGateway_url + relativeUrl, body, _httpOptions)
-      .pipe(
-        catchError(error => this.handleRequiredErrorResponse(error))
-      ).toPromise();
-
-    var responseData = new ResponseData();
-
-    responseData.statusCode = "200";
-    responseData.response = response;
-
-    return responseData;
-  }
-
-
-
-  put(relativeUrl: string, body: any, _httpOptions?: any) {
-    if (!this.baseGateway_url)
-      this.setBaseUrl();
-
-    this.baseGateway_url = "https://localhost:44335";
-
-    var response = this.http.put(this.baseGateway_url + relativeUrl, body, _httpOptions)
+    var response = await this.http.post(this.baseGateway_url + relativeUrl, body, _httpOptions)
       .pipe(
         catchError(error => this.handleRequiredErrorResponse(error))
       ).toPromise();
@@ -97,13 +76,34 @@ export abstract class BaseGatewayService {
 
 
 
-  delete(relativeUrl: string, _httpOptions?: any) {
+  async put(relativeUrl: string, body: any, _httpOptions?: any) {
     if (!this.baseGateway_url)
       this.setBaseUrl();
 
     this.baseGateway_url = "https://localhost:44335";
 
-    var response = this.http.delete(this.baseGateway_url + relativeUrl, _httpOptions)
+    var response = await this.http.put(this.baseGateway_url + relativeUrl, body, _httpOptions)
+      .pipe(
+        catchError(error => this.handleRequiredErrorResponse(error))
+      ).toPromise();
+
+    var responseData = new ResponseData();
+
+    responseData.statusCode = "200";
+    responseData.response = response;
+
+    return responseData;
+  }
+
+
+
+  async delete(relativeUrl: string, _httpOptions?: any) {
+    if (!this.baseGateway_url)
+      this.setBaseUrl();
+
+    this.baseGateway_url = "https://localhost:44335";
+
+    var response = await this.http.delete(this.baseGateway_url + relativeUrl, _httpOptions)
       .pipe(
         catchError(error => this.handleRequiredErrorResponse(error))
       ).toPromise();
@@ -117,6 +117,9 @@ export abstract class BaseGatewayService {
   }
 
   handleRequiredErrorResponse(errorResponse: HttpErrorResponse) {
+
+    console.log(errorResponse);
+
     var response = new ResponseData();
 
     if (errorResponse.status == 400 || errorResponse.status == 401 || errorResponse.status == 404) {

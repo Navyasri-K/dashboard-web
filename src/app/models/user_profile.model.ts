@@ -16,6 +16,7 @@ export class UserProfileModel {
   aboutMe: string;
   designation: string;
   profilePic: string;
+  profileImageBase64: string;
 
   /**
    * copy user details

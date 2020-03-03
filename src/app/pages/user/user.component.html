@@ -161,8 +161,15 @@
             <div class="block block-two"></div>
             <div class="block block-three"></div>
             <div class="block block-four"></div>
-            <a href="javascript:void(0)">
-              <img alt="..." class="avatar" src="assets/img/emilyz.jpg" />
+            <a>
+              <img alt="..." class="avatar" src="{{userInfo && userInfo.profilePic}}" />
+              <div class="p-image">
+                <input style="display: none"
+                       type="file" (change)="updateProfilePic($event)"
+                       #fileInput>
+                <i  class="fa fa-camera upload-button" (click)="fileInput.click()"></i>
+              </div>
+             
               <h5 class="title">{{userInfo && userInfo.userName}}</h5>
             </a>
             <p class="description">{{userInfo && userInfo.designation}}</p>

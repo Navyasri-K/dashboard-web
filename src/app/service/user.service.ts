@@ -51,7 +51,7 @@ export class UserService extends BaseGatewayService {
     this.HttpOptions.params = params;
 
     //let responseData = this.getJson('../../assets/ui/com.messages.json', this.HttpOptions);
-    let responseData = this.post('/api/auth/login', body, this.HttpOptions);
+    let responseData = await this.post('/api/auth/login', body, this.HttpOptions);
 
     if (responseData.statusCode == '200')
       return responseData.response;
@@ -72,7 +72,7 @@ export class UserService extends BaseGatewayService {
 
     this.HttpOptions.params = params;
 
-    let responseData = this.post('/api/auth/register', body, this.HttpOptions);
+    let responseData = await this.post('/api/auth/register', body, this.HttpOptions);
 
     if (responseData.statusCode == '200')
       return responseData.response;
@@ -86,7 +86,7 @@ export class UserService extends BaseGatewayService {
 
     this.HttpOptions.params = params;
 
-    let responseData = this.put('/api/auth/update:userProfile', userProfile, this.HttpOptions);
+    let responseData = await this.put('/api/auth/update:userProfile', userProfile, this.HttpOptions);
 
     if (responseData.statusCode == '200')
       return responseData.response;
