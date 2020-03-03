@@ -138,6 +138,6 @@ export class UserComponent implements OnInit {
 
     
 
-    this.userInfo.profilePic = decryptedText;
+    this.userInfo.profilePic = "data:image/jpeg;base64," + decryptedText;
   }
 }

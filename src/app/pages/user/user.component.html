@@ -162,14 +162,16 @@
             <div class="block block-three"></div>
             <div class="block block-four"></div>
             <a>
-              <img alt="..." class="avatar" src="{{userInfo && userInfo.profilePic}}" />
+              <img *ngIf="userInfo && userInfo.profilePic" alt="..." class="avatar" src="{{userInfo && userInfo.profilePic}}" />
+              <img *ngIf="userInfo && !userInfo.profilePic && userInfo.gender == 'F'" alt="..." class="avatar" src="assets/img/female.png" />
+              <img *ngIf="userInfo && !userInfo.profilePic && userInfo.gender == 'M'" alt="..." class="avatar" src="assets/img/male.png" />
               <div class="p-image">
                 <input style="display: none"
                        type="file" (change)="updateProfilePic($event)"
                        #fileInput>
-                <i  class="fa fa-camera upload-button" (click)="fileInput.click()"></i>
+                <i class="fa fa-camera upload-button" (click)="fileInput.click()"></i>
               </div>
-             
+
               <h5 class="title">{{userInfo && userInfo.userName}}</h5>
             </a>
             <p class="description">{{userInfo && userInfo.designation}}</p>
