@@ -1,0 +1,83 @@
+<div class="content taskContent">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Add Task</h5>
+        </div>
+        <div class="card-body">
+          <form novalidate #userProfile="ngForm" id="userProfile" role="form">
+            <div class="row">
+              <div class="col-md-12 px-md-3">
+                <custom-input [labelText]="'Task Name'">
+                  <input class="form-control form-txt"
+                         name="emailIdCtrl"
+                         id="emailIdCtrlId"
+                         placeholder="Email id"
+                         type="email"
+                         #emailIdCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.taskTitle"
+                         autocomplete="off">
+
+                </custom-input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 px-md-3">
+                <custom-input [labelText]="'Task Description'">
+                  <input class="form-control form-txt"
+                         name="designationCtrl"
+                         id="designationCtrlId"
+                         placeholder="Designation"
+                         type="text"
+                         #designationCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.description"
+                         appCustomValidator autocomplete="off">
+
+                </custom-input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 px-md-3">
+                <custom-input [labelText]="'Assigned To'"
+                              [formCtrlErrors]="firstNameCtrl.errors"
+                              [errorTypes]="{RequiredFirstName: ''}">
+                  <input class="form-control form-txt"
+                         name="firstNameCtrl"
+                         id="firstNameCtrlId"
+                         placeholder="First Name"
+                         type="text"
+                         #firstNameCtrl="ngModel"
+                         [(ngModel)]="userInfo && userInfo.assignedTo"
+                         (keyPress)="allowOnlyAlpha($event)"
+                         appCustomValidator autocomplete="off">
+                </custom-input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 px-md-3">
+                <label class="form-control taskStatus" id="newStatus" (click)="selectedStatus('newStatus')">New</label>
+              </div>
+              <div class="col-md-4 px-md-3">
+                <label class="form-control taskStatus" id="inProgressStatus" (click)="selectedStatus('inProgressStatus')">In Progress</label>
+              </div>
+              <div class="col-md-4 px-md-3">
+                <label class="form-control taskStatus" id="completedStatus" (click)="selectedStatus('completedStatus')">Completed</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-danger" type="button"
+                  (click)="saveUserProfile()">
+            Add
+          </button>
+          <button class="btn btn-fill btn-danger" type="button"
+                  (click)="closeCustomModal()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

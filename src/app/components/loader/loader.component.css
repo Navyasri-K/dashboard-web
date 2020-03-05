@@ -1,0 +1,12 @@
+#pre-bootstrap{
+    background-color:white;
+    bottom:0px;
+    position:fixed;
+    right:0px;
+    top:50px;
+    z-index:999999;
+}
+
+#pre-bootstrap  div.messaging{
+
+}

@@ -5,22 +5,22 @@ import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { ToastrModule } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BlockUIModule } from 'ng-block-ui';
 
 import { AppComponent } from "./app.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { RouteReuseStrategy } from '@angular/router';
-import { CustomReuseStrategy } from './shared/route-guards/router-reuse-strategy';
 import { RoutingState } from './shared/route-guards/routing-state';
 import { PubSubService } from './pub-sub/pub_sub.service';
 import { PubSubModule } from './pub-sub/pub_sub.module';
+import { SimpleModalModule } from 'ngx-simple-modal';
+import { TaskComponent } from './pages/tasks/task.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/ui/', '.json');
@@ -45,15 +45,22 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
     PubSubModule.forRoot(),
     TextMaskModule,
+    BlockUIModule.forRoot(),
+    SimpleModalModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent],
+    AuthLayoutComponent,
+    TaskComponent
+  ],
   providers: [
     //{ provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
     RoutingState,
     PubSubService
+  ],
+  entryComponents: [
+    TaskComponent
   ],
   bootstrap: [AppComponent]
 })

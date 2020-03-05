@@ -82,3 +82,76 @@ img {
   transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
   color: #999;
 }
+
+.alignCenter {
+  text-align: center;
+}
+
+
+.shakeMe {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+.backdrop_ui-block {
+  background-color: #adb5bd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2500;
+  opacity: 0.447059;
+}
+
+.taskContent {
+  z-index: 2501;
+  position: fixed;
+  left: 34%;
+  top: 15%;
+  width: 50%;
+  border-radius: 7px;
+  resize: both;
+}
+
+.modal.fade.in {
+  opacity: 1;
+  overflow: auto;
+}
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #adb5bd94;
+}
+
+.modal {
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5000;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 4px;
+  margin: 60px auto;
+  max-width: 580px;
+  position: relative;
+  transition: opacity 400ms ease-in-out;
+  width: 100%;
+  margin-top: 90%;
+  will-change: opacity;
+  display: inline-block;
+  text-align: left;
+}
+
+.form-control.taskStatus {
+  text-align:center;
+}

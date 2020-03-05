@@ -17,6 +17,7 @@ export class UserProfileModel {
   designation: string;
   profilePic: string;
   profileImageBase64: string;
+  roleBits63: number;
 
   /**
    * copy user details
@@ -45,11 +46,11 @@ export class UserProfileModel {
 
   cloneUserResponse(user) {
 
-    this.userID = user.userId;
+    this.userID = user.userID;
     this.emailID = user.emailId;
     this.userName = user.userName;
-    this.firstName = user.userName.split(" ", 2)[0];
-    this.lastName = user.userName.split(" ", 2)[1];
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
     this.mobileNumber = user.mobileNumber;
     this.address = user.address;
     this.countryCode = user.country;
@@ -59,5 +60,7 @@ export class UserProfileModel {
     this.aboutMe = user.aboutMe;
     this.designation = user.designation;
     this.profilePic = user.profileImageBytes;
+    this.roleBits63 = user.roleBits63;
+    this.profileImageBase64 = user.profileImageBase64;
   }
 }

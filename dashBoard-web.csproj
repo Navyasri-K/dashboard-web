@@ -29,18 +29,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="src\app\components\loader\loader.component.ts" />
     <None Remove="src\app\custom-formcontrol\custom-input.component.ts" />
     <None Remove="src\app\models\task.model.ts" />
     <None Remove="src\app\models\user_profile.model.ts" />
+    <None Remove="src\app\pages\tasks\task.component.ts" />
     <None Remove="src\app\service\notifications.service.ts" />
     <None Remove="src\app\shared\constants\constant-values.const.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="src\app\app-config.ts" />
+    <TypeScriptCompile Include="src\app\components\loader\loader.component.ts" />
     <TypeScriptCompile Include="src\app\custom-formcontrol\custom-input.component.ts" />
     <TypeScriptCompile Include="src\app\models\task.model.ts" />
     <TypeScriptCompile Include="src\app\models\user_profile.model.ts" />
+    <TypeScriptCompile Include="src\app\pages\tasks\task.component.ts" />
     <TypeScriptCompile Include="src\app\server.ts" />
     <TypeScriptCompile Include="src\app\service\notifications.service.ts" />
     <TypeScriptCompile Include="src\app\service\user.service.ts" />

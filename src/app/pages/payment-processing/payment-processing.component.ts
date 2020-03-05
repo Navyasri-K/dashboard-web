@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { SimpleModalService } from 'ngx-simple-modal';
+import { TaskComponent } from '../tasks/task.component';
 
 @Component({
   selector: 'app-payment-processing',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentProcessingComponent implements OnInit {
 
-  constructor() { }
+  showMe: boolean;
+  @BlockUI() blockUI: NgBlockUI;
+
+  constructor(private _simpleModal: SimpleModalService) { }
 
   ngOnInit() {
   }
 
+
+  clicMe(event) {
+    this.blockUI.start('Loading...'); // Start blocking
+    event.preventDefault();
+    this.showMe = true;
+
+    this._simpleModal.addModal(TaskComponent,
+      {
+
+      }).subscribe(res => {
+      });
+  }
 }

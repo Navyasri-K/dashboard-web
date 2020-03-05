@@ -33,7 +33,7 @@ import { PubSubModule } from '../../pub-sub/pub_sub.module';
     PubSubModule,
     HttpClientModule,
     NgbModule,
-    TextMaskModule
+    TextMaskModule,
   ],
   declarations: [
     DashboardComponent,
@@ -49,7 +49,7 @@ import { PubSubModule } from '../../pub-sub/pub_sub.module';
     AdministrationComponent,
     EPayComponent,
     PaymentProcessingComponent,
-    RecoveryComponent
+    RecoveryComponent,
     // RtlComponent
   ]
 })

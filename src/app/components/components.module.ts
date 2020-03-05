@@ -7,23 +7,26 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { FooterComponent } from "./footer/footer.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     NgbModule,
-    TextMaskModule
+    TextMaskModule,
   ],
   declarations: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoaderComponent
   ],
   exports: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoaderComponent
   ]
 })
 export class ComponentsModule { }

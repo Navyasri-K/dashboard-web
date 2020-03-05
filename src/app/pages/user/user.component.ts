@@ -59,14 +59,11 @@ export class UserComponent implements OnInit {
       if (response.isSuccess) {
         this._notificationUserIns.showNotification('top', 'right', 1, response.returnMessage);
 
-        this.userInfo.userID = response.data.userID;
-
         let updatedUser = new UserProfileModel();
 
         updatedUser.cloneUserInfo(this.userInfo);
 
         await this._pubSubService.setUserProfile(updatedUser);
-        await this._pubSubService.setToken(response.data.token);
 
         this.form.reset();
 

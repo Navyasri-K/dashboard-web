@@ -18,7 +18,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     TranslateModule,
     HttpClientModule,
     NgbModule,
-    TextMaskModule
+    TextMaskModule,
   ],
   declarations: [
     CustomValidatorDirective,
