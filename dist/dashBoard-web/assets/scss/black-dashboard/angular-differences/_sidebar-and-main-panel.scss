@@ -1,11 +1,11 @@
 .main-panel {
-  &, &[data="red"]{
+  &, &[data="red"] {
     border-color: $danger;
   }
 
   .content {
     padding: 78px 30px 30px 280px;
-    min-height: calc(100vh - 70px);
+    min-height: calc(99vh - 70px);
   }
 }
 @media screen and (max-width: 768px){

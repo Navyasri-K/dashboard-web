@@ -1,11 +1,18 @@
 import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { SimpleModalComponent } from "ngx-simple-modal";
+import { TasksModel } from '../../models/task.model';
 
 @Component({
   selector: 'add-edit-task',
   templateUrl: './task.component.html'
 })
-export class TaskComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel {
+export class TaskComponent extends SimpleModalComponent<ConfirmModel, ConfirmModel> implements ConfirmModel, OnInit {
+
+  ngOnInit() {
+    
+  }
+
+  taskIns: TasksModel;
 
   selectedStatus(elementId) {
 
@@ -23,11 +30,15 @@ export class TaskComponent extends SimpleModalComponent<ConfirmModel, boolean> i
   }
 
   closeCustomModal() {
-    this.result = true;
+
+    let task = new ConfirmModel();
+    this.result = task;
     this.close();
   }
 }
 
 export class ConfirmModel {
+
+  taskIns: TasksModel;
 
 }
